@@ -8,15 +8,14 @@ public class Main{
         int m = sc.nextInt();
         int t = sc.nextInt();
         m += t;
+        int newM = m % 60; // 표시될 분
+        int newH = h + (m/60); // 표시될 시
         
-        if ( m >= 60 ) {
-            h+=1;
-            if ( h == 24 ) {
-                h = 0;
-            }
-            m -= 60;
+        if (newH >= 24) { 
+            newH %= 24; // 24시가 넘어가는 경우 시간 설정
         }
         
-        System.out.println(h + " " + m);
+        System.out.println(newH + " " + newM);
+        
     }
 }
