@@ -1,8 +1,9 @@
 #include <stdio.h>
+#include <stdlib.h>
 
-size_t	get_last_idx(char num[])
+int	get_last_idx(char num[])
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	while (num[i])
@@ -12,17 +13,18 @@ size_t	get_last_idx(char num[])
 
 void	set_zero(char num[])
 {
-	for (size_t i = 0; i < 10003; i++)
-		num[i] = 0;
+	for (int i = 0; i < 10002; i++)
+		num[i] = '0';
+	num[10002] = '\0';
 }
 
 char	*add_big_nums(char num1[], char num2[])
 {
 	char	*result;
-	char	temp;
-	size_t	idx1;
-	size_t	idx2;
-	size_t	idx3;
+	int		temp;
+	int		idx1;
+	int		idx2;
+	int		idx3;
 
 	result = malloc(sizeof(char) * 10003);
 	set_zero(result);
@@ -31,8 +33,8 @@ char	*add_big_nums(char num1[], char num2[])
 	idx3 = 10001;
 	while (idx1 >= 0 && idx2 >= 0)
 	{
-		temp = num1[idx1] + num2[idx2] - '0';
-		if (temp > '9')
+		temp = (num1[idx1] - '0') + (num2[idx2] - '0');
+		if (temp > 9)
 		{
 			result[idx3 - 1]++;
 			temp -= 10;
@@ -42,7 +44,7 @@ char	*add_big_nums(char num1[], char num2[])
 		idx2--;
 		idx3--;
 	}
-	if (idx1 == 0)
+	if (idx1 == -1)
 	{
 		while (idx2 >= 0)
 		{
@@ -50,26 +52,27 @@ char	*add_big_nums(char num1[], char num2[])
 			if (result[idx3] > '9')
 			{
 				result[idx3] = '0';
-				result[idx3 - 1] = 1;
+				result[idx3 - 1] += 1;
 			}
 			idx2--;
 			idx3--;
 		}
 	}
-	else if (idx2 == 0)
+	else if (idx2 == -1)
 	{
 		while (idx1 >= 0)
+		{
 			result[idx3] += num1[idx1];
 			if (result[idx3] > '9')
 			{
 				result[idx3] = '0';
-				result[idx3 - 1] = 1;
+				result[idx3 - 1] += 1;
 			}
 			idx1--;
 			idx3--;
+		}
 	}
 	return (result + idx3);
-
 }
 
 int	main(void)
