@@ -1,52 +1,83 @@
 #include <stdio.h>
 
-void    init_char_zero(char res[])
+size_t	get_last_idx(char num[])
 {
-    for (int i = 0; i < 10002; i++)
-        res[i] = '0';
-    res[i] = '\0';
+	size_t	i;
+
+	i = 0;
+	while (num[i])
+		i++;
+	return (i - 1);
 }
 
-int    get_last_idx(char *str)
+void	set_zero(char num[])
 {
-    int    i;
-    
-    i = 0;
-    while (*(str + i))
-        i++;
-    i--;
-    return (i);
+	for (size_t i = 0; i < 10003; i++)
+		num[i] = 0;
 }
 
-char    *add_big_nbr(char num1[], char num2[])
+char	*add_big_nums(char num1[], char num2[])
 {
-    char    res[10003];
-    char    temp;
-    int     i1;
-    int     i2;
-    int     i_res;
-    
-    init_char_zero(res);
-    i1 = get_last_idx(num1);
-    i2 = get_last_idx(num2);
-    i_res = 10001;
-    while (i1 != -1 || i2 != -1)
-    {
-        temp = res[i_res] + num1[i1] + num1[i2] - 96;
-        if (temp > '9')
-        {
-            res[i_res - 1] += 1;
-            temp -= 10;
-        }
-        res[i_res] = res[i_res] + 
-    }
+	char	*result;
+	char	temp;
+	size_t	idx1;
+	size_t	idx2;
+	size_t	idx3;
+
+	result = malloc(sizeof(char) * 10003);
+	set_zero(result);
+	idx1 = get_last_idx(num1);
+	idx2 = get_last_idx(num2);
+	idx3 = 10001;
+	while (idx1 >= 0 && idx2 >= 0)
+	{
+		temp = num1[idx1] + num2[idx2] - '0';
+		if (temp > '9')
+		{
+			result[idx3 - 1]++;
+			temp -= 10;
+		}
+		result[idx3] += temp;
+		idx1--;
+		idx2--;
+		idx3--;
+	}
+	if (idx1 == 0)
+	{
+		while (idx2 >= 0)
+		{
+			result[idx3] += num2[idx2];
+			if (result[idx3] > '9')
+			{
+				result[idx3] = '0';
+				result[idx3 - 1] = 1;
+			}
+			idx2--;
+			idx3--;
+		}
+	}
+	else if (idx2 == 0)
+	{
+		while (idx1 >= 0)
+			result[idx3] += num1[idx1];
+			if (result[idx3] > '9')
+			{
+				result[idx3] = '0';
+				result[idx3 - 1] = 1;
+			}
+			idx1--;
+			idx3--;
+	}
+	return (result + idx3);
+
 }
 
-int    main(void)
+int	main(void)
 {
-    char    num1[10002];
-    char    num2[10002];
-    
-    scanf("%s %s", num1, num2);
-    printf("%s\n", add_big_nbr(num1, num2));
+	char	num1[10002];
+	char	num2[10002];
+
+	scanf("%s %s", num1, num2);
+	printf("%s\n", add_big_nums(num1, num2));
+	return (0);
 }
