@@ -26,7 +26,7 @@ char	*add_big_nums(char num1[], char num2[])
 	int		idx2;
 	int		idx3;
 
-	result = malloc(sizeof(char) * 10003);
+	result = malloc(sizeof(char) * 10004);
 	set_zero(result);
 	idx1 = get_last_idx(num1);
 	idx2 = get_last_idx(num2);
@@ -48,7 +48,7 @@ char	*add_big_nums(char num1[], char num2[])
 	{
 		while (idx2 >= 0)
 		{
-			result[idx3] += num2[idx2];
+			result[idx3] = result[idx3] + num2[idx2] - '0';
 			if (result[idx3] > '9')
 			{
 				result[idx3] = '0';
@@ -62,7 +62,7 @@ char	*add_big_nums(char num1[], char num2[])
 	{
 		while (idx1 >= 0)
 		{
-			result[idx3] += num1[idx1];
+			result[idx3] = result[idx3] + num1[idx1] - '0';
 			if (result[idx3] > '9')
 			{
 				result[idx3] = '0';
@@ -72,6 +72,10 @@ char	*add_big_nums(char num1[], char num2[])
 			idx3--;
 		}
 	}
+	while (result[idx3] == '0')
+		idx3++;
+	if (result[idx3] == '\0')
+		idx3--;
 	return (result + idx3);
 }
 
