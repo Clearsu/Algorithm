@@ -13,7 +13,7 @@ int	get_last_idx(char num[])
 
 void	set_zero(char num[])
 {
-	for (int i = 0; i < 10002; i++)
+	for (int i = 3; i < 10002; i++)
 		num[i] = '0';
 	num[10002] = '\0';
 }
