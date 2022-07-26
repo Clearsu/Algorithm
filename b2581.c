@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 11:35:56 by jincpark          #+#    #+#             */
-/*   Updated: 2022/07/19 12:15:25 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/07/26 11:09:32 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ int	is_prime(int n)
 	int	i;
 
 	i = 2;
+	if (n == 1)
+		return (0);
+	else if (n == 2 || n == 3)
+		return (n);
 	while (i * i <= n)
 	{
 		if (n % i == 0)
