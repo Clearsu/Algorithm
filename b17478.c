@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/27 19:03:58 by jincpark          #+#    #+#             */
-/*   Updated: 2022/07/28 15:57:09 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/07/28 23:24:04 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,15 @@ void	print____(int n)
 
 void	recul_chat_bot(int n, int m)
 {
+	print____(m);
+	printf("\"재귀함수가 뭔가요?\"\n");
 	if (n == 0)
 	{
 		print____(m);
-		printf("\"재귀함수가 뭔가요?\"\n");
-		print____(m);
 		printf("\"재귀함수는 자기 자신을 호출하는 함수라네\"\n");
-		print____(m);
-		printf("라고 답변하였지.\n");
-		return ;
 	}
 	else
 	{
-		print____(m);
-		printf("\"재귀함수가 뭔가요?\"\n");
 		print____(m);
 		printf("\"잘 들어보게. 옛날옛날 한 산 꼭대기에 이세상 모든 지식을 통달한 선인이 있었어.\n");
 		print____(m);
