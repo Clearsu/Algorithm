@@ -6,13 +6,15 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 14:29:36 by jincpark          #+#    #+#             */
-/*   Updated: 2022/08/01 14:32:25 by jincpark         ###   ########.fr       */
+/*   Updated: 2022/09/04 17:13:09 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
+
 void	print_hanoi(int n)
 {
-
+	
 }
 
 int	main(void)
