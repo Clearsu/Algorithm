@@ -6,7 +6,7 @@
 /*   By: jincpark <jincpark@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 01:54:16 by jincpark          #+#    #+#             */
-/*   Updated: 2023/01/03 03:26:44 by jincpark         ###   ########.fr       */
+/*   Updated: 2023/01/26 18:08:54 by jincpark         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,9 @@ void	devide_and_merge(int *arr_src, int *arr_dest, int first, int last)
 {
 	int	mid;
 
-	if (first == last)
+	if (last - first < 2)
 		return ;
-	mid = (last - first) / 2;
+	mid = (last + first) / 2;
 	devide_and_merge(arr_src, arr_dest, first, mid);
 	devide_and_merge(arr_src, arr_dest, mid + 1, last);
 	sort_and_merge(arr_src, arr_dest, first, mid, last);
@@ -85,7 +85,5 @@ int	main(void)
 	}
 	else
 		print_arr(arr_src, n);
-	free(arr_src);
-	free(arr_dest);
 	return (0);
 }
