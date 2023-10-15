@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <limits>
 
 int main(void) {
 	int n;
@@ -17,7 +18,7 @@ int main(void) {
 	std::sort(hills.begin(), hills.end());
 
 	int minCost, tempCost, idx, diff, maxInRange;
-	minCost = 2147483647;
+	minCost = std::numeric_limits<int>::max();
 	for (int minInRange = hills[0]; minInRange <= hills[n - 1] - 17; minInRange++) {
 		tempCost = 0;
 		idx = 0;
