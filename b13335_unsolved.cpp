@@ -1,92 +1,43 @@
-#include <iostream>
+#include <deque>
 #include <queue>
-#include <vector>
+#include <iostream>
 
-void moveTrucks(std::vector<int>& bridge, int w, int& truckPassed, int& totalWeightOfTrucks) {
-	if (bridge[w - 1] != 0) {
-		totalWeightOfTrucks -= bridge[w - 1];
-		bridge[w - 1] = 0;
-		truckPassed++;
-	}
-	if (w == 1) {
-		return ;
-	}
-	for (int i = w - 2; i >= 0; i--) {
-		if (bridge[i] != 0) {
-			bridge[i + 1] = bridge[i];
-			bridge[i] = 0;
-		}
-	}
+void moveTrucks(std::deque<int>& bridge, int& time, int& trucksPassed) {
+	if (bridge. != 0) {
+		trucksPassed++;
+	}	
+	bridge.pop_front();
 }
 
-int getTrucksWeightOnBridge(std::vector<int>& bridge, int w) {
-	int sum = 0;
-
-	for (int i = 0; i < w; i++) {
-		sum += bridge[i];	
-	}
-	return sum;
-}
-
-void printBridge(std::vector<int>& bridge, int w) {
-	std::cout << "bridge: ";
-	for (int i = 0; i < w; i++) {
-		std::cout << bridge[i] << ' ';
-	}
-	std::cout << '\n';
-}
-
-int main(void) {
-	// w : 다리 길이
-	// l : 최대 하중
+int main() {
 	int n, w, l;
 
 	std::cin >> n >> w >> l;
 	std::cin.ignore();
 
-	std::queue<int> queue;
-	int truck;
+	std::queue<int> trucks;
+	int truckWeight;
 	for (int i = 0; i < n; i++) {
-		std::cin >> truck;
-		queue.push(truck);
+		std::cin >> truckWeight;
+		trucks.push(truckWeight);
 	}
 
-	std::vector<int> bridge(w);
-	int time = 0;
+	std::deque<int> bridge(w);	
 	int trucksPassed = 0;
-	int trucksOnBridge = 0;
-	int totalWeightOfTrucks = 0;
+	int totalWeightOnBridge = 0;
 
-	while (!queue.empty()) {
-		while (totalWeightOfTrucks + queue.front() <= l
-				&& !queue.empty() && trucksOnBridge < w) {
-			if (trucksOnBridge != 0) {
-				moveTrucks(bridge, w, trucksPassed, totalWeightOfTrucks);
-			}
-			bridge[0] = queue.front();
-			totalWeightOfTrucks += bridge[0];
-			trucksOnBridge++;
-			queue.pop();
-			time++;
-			printBridge(bridge, w);
-		}
-		int initialWeightSumOnBridge = totalWeightOfTrucks;
-		while (totalWeightOfTrucks == initialWeightSumOnBridge) {
-			moveTrucks(bridge, w, trucksPassed, totalWeightOfTrucks);
-			if (totalWeightOfTrucks + queue.front() <= l) {
-				break ;
-			}
-			time++;
-			// printBridge(bridge, w);
+	bridge[0] = trucks.front();
+	totalWeightOnBridge += trucks.front();
+	trucks.pop();
+	int time = 1;
+	while (trucksPassed != n) {
+		while (totalWeightOnBridge + trucks.front() < l) {
+			moveTrucks(bridge, time, trucksPassed);
+			bridge[0] = trucks.front();
+			totalWeightOnBridge += trucks.front();
+			trucks.pop();
 		}
 	}
-	while (totalWeightOfTrucks > 0) {
-		moveTrucks(bridge, w, trucksPassed, totalWeightOfTrucks);
-		time++;
-	}
-	time++;
 
-	std::cout << time << '\n';
-	
 	return 0;
 }
