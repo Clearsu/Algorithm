@@ -31,6 +31,9 @@ void bfs(std::queue<std::pair<int, int> >& queueFirst,
 }
 
 int main() {
+	std::ios::sync_with_stdio(0);
+	std::cin.tie(0);
+
 	std::queue<std::pair<int, int> > queue1;
 	std::queue<std::pair<int, int> > queue2;
 
@@ -42,7 +45,6 @@ int main() {
 				queue1.push(std::pair<int, int>(i, j));
 			}
 		}
-		std::cin.ignore();
 	}
 
 	while (!(queue1.empty() && queue2.empty())) {
