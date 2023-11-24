@@ -63,7 +63,7 @@ void findFirstOne(int arr[6][6], int& i, int& j) {
 const int dx[4] = {0, 0, 1, -1};
 const int dy[4] = {1, -1, 0, 0};
 
-bool bfs(int arr[6][6]) {
+void bfs(int arr[6][6]) {
 	bool visited[6] = { false, };
 
 	std::vector<int> initialDice;
@@ -109,10 +109,11 @@ bool bfs(int arr[6][6]) {
 	}
 	for (int i = 0; i < 6; i++) {
 		if (visited[i] == false) {
-			return false;
+			std::cout << "no\n";
+			return;
 		}
 	}
-	return true;
+	std::cout << "yes\n";
 }
 
 int main() {
@@ -126,6 +127,6 @@ int main() {
 		}
 	}
 	for (int i = 0; i < 3; i++) {
-		std::cout << (bfs(cases[i]) ? "yes\n" : "no\n");
+		bfs(cases[i]);
 	}
 }
