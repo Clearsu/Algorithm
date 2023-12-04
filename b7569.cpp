@@ -2,9 +2,9 @@
 #include <queue>
 
 struct Coord {
+	int z, y, x, day;
 	Coord(int initZ, int initY, int initX, int initDay)
 		: z(initZ), y(initY), x(initX), day(initDay) {}
-	int x, y, z, day;
 };
 
 int main() {
@@ -27,14 +27,22 @@ int main() {
 	for (int i = 0; i < h; i++) {
 		for (int j = 0; j < n; j++) {
 			for (int k = 0; k < m; k++) {
-				std::cin >> boxes[i][j][k];
-				if (boxes[i][j][k] == 1) {
+				int& tomato = boxes[i][j][k];
+				std::cin >> tomato;
+				if (tomato == 1) {
 					queue.push(Coord(i, j, k, 0));
-				} else if (boxes[i][j][k] == 0) {
+					continue ;
+				}
+				if (tomato == 0) {
 					tomatosLeft++;
 				}
 			}
 		}
+	}
+
+	if (tomatosLeft == 0) {
+		std::cout << "0\n";
+		return 0;
 	}
 
 	int maxDay = 0;
@@ -49,23 +57,28 @@ int main() {
 		}
 		for (int i = 0; i < 6; i++) {
 			newZ = curr.z + dz[i];
-			newY = curr.y + dy[i];
-			newX = curr.x + dx[i];
-			if (newZ < 0 || newY < 0 || newX < 0 || newZ >= h || newY >= n || newX >= m
-				|| boxes[newZ][newY][newX] == -1 || boxes[newZ][newY][newX] == 1) {
+			if (newZ < 0 || newZ >= h) {
 				continue ;
 			}
-			boxes[newZ][newY][newX] = 1;
+			newY = curr.y + dy[i];
+			if (newY < 0 || newY >= n) {
+				continue ;
+			}
+			newX = curr.x + dx[i];
+			if (newX < 0 || newX >= m) {
+				continue ;
+			}
+			int& tomato = boxes[newZ][newY][newX];
+			if (tomato == -1 || tomato == 1) {
+				continue ;
+			}
+			tomato = 1;
 			tomatosLeft--;
 			queue.push(Coord(newZ, newY, newX, currDay + 1));
 		}
 	}
 
-	if (tomatosLeft != 0) {
-		std::cout << "-1\n";
-	} else {
-		std::cout << maxDay << '\n';
-	}
+	std::cout << (tomatosLeft == 0 ? maxDay : -1) << '\n';
 
 	return 0;
 }
