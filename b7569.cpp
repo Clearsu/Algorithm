@@ -12,7 +12,7 @@ int main() {
 	std::cout.tie(0);
 	std::ios_base::sync_with_stdio(0);
 
-	int boxes[101][101][101] = {0, };
+	int boxes[100][100][100] = {0, };
 	std::queue<Coord> queue;
 
 	int dz[6] = {1, -1, 0, 0, 0, 0};
