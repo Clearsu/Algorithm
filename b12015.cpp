@@ -1,9 +1,7 @@
 #include <iostream>
-#include <array>
 
 using namespace std;
 
-int n;
 int arr[1000000];
 
 void insertValue(int start, int end, int value) {
@@ -27,6 +25,7 @@ int main() {
 	cin.tie(0);
 	ios_base::sync_with_stdio(0);
 
+	int n;
 	cin >> n;
 
 	int value;
