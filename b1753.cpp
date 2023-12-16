@@ -22,6 +22,9 @@ void dijkstra(int start) {
 		curr = pqueue.top().second;
 		currDist = pqueue.top().first;
 		pqueue.pop();
+		if (currDist > minDistance[curr]) {
+			continue ;
+		}
 		size = nodes[curr].size();
 		for (int i = 0; i < size; i++) {
 			next = nodes[curr][i].second;
