@@ -28,12 +28,10 @@ int main(void) {
 
 	int jewelIdx = 0;
 	long long maxValue = 0;
-	int jewelWeight, currBagCapacity;
 
 	for (int i = 0; i < k; i++) {
 		while (jewelIdx < n && jewels[jewelIdx].first <= bags[i]) {
-			jewelsToSteal.push(jewels[jewelIdx].second);
-			jewelIdx++;
+			jewelsToSteal.push(jewels[jewelIdx++].second);
 		}
 		if (!jewelsToSteal.empty()) {
 			maxValue += jewelsToSteal.top();
