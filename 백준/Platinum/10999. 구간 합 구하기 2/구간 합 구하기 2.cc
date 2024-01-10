@@ -3,8 +3,8 @@
 using namespace std;
 
 int n, m, k;
-vector<long long> tree, lazy;
-vector<long long> initialValues;
+long long tree[4000001], lazy[4000001] = {0, };
+long long initialValues[1000001];
 
 long long init(int start, int end, int node) {
 	if (start == end) {
@@ -28,7 +28,9 @@ void update_lazy(int start, int end, int node) {
 
 void update_range(int start, int end, int node, int left, int right, long long diff) {
     update_lazy(start, end, node);
-    if (left > end || right < start) return;
+    if (left > end || right < start) {
+		return;
+	}
     if (left <= start && end <= right) {
 		lazy[node] = diff;
 		update_lazy(start, end, node);
@@ -42,8 +44,12 @@ void update_range(int start, int end, int node, int left, int right, long long d
 
 long long sum(int start, int end, int node, int left, int right) {
     update_lazy(start, end, node);
-    if (left > end || right < start) return 0;
-    if (left <= start && end <= right) return tree[node];
+    if (left > end || right < start) {
+		return 0;
+	}
+    if (left <= start && end <= right) {
+		return tree[node];
+	}
     int mid = (start + end) / 2;
     return sum(start, mid, node * 2, left, right) + sum(mid + 1, end, node * 2 + 1, left, right);
 }
@@ -54,13 +60,9 @@ int main() {
 
     cin >> n >> m >> k;
 
-    initialValues.resize(n + 1);
     for (int i = 1; i <= n; i++) {
         cin >> initialValues[i];
     }
-
-    tree.resize(4 * n + 1);
-    lazy.assign(4 * n + 1, 0);
 
 	init(1, n, 1);
 
