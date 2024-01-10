@@ -1,54 +1,26 @@
 #include <iostream>
+#include <algorithm>
+#include <vector>
 using namespace std;
 
-int n;
-int arr[1000000];
-int res[1000000];
-
-void merge(int start, int mid, int end) {
-	int i = start, j = mid + 1, k = start;
-	while (i <= mid && j <= end) {
-		res[k++] = arr[i] < arr[j] ? arr[i++] : arr[j++];
-	}
-	while (i <= mid) {
-		res[k++] = arr[i++];
-	}
-	while (j <= end) {
-		res[k++] = arr[j++];
-	}
-	if (start == 0 && end == n - 1) {
-		return ;
-	}
-	while (start <= end) {
-		arr[start] = res[start];
-		start++;
-	}
-}
-
-void mergeSort(int start, int end) {
-	if (start == end) {
-		return ;
-	}
-	int mid = (start + end) / 2;
-	mergeSort(start, mid);
-	mergeSort(mid + 1, end);
-	merge(start, mid, end);
-}
+vector<int> vec;
 
 int main() {
+	cin.tie(0);
+	ios_base::sync_with_stdio(0);
+
+	int n;
 	cin >> n;
-	for (int i = 0; i < n; i++) {
-		cin >> arr[i];	
-	}
 
-	if (n == 1) {
-		cout << arr[0] << '\n';
-		return 0;
-	}
-
-	mergeSort(0, n - 1);
+	vec.resize(n);
 
 	for (int i = 0; i < n; i++) {
-		cout << res[i] << '\n';
+		cin >> vec[i];
+	}
+
+	sort(vec.begin(), vec.end());
+
+	for (int i = 0; i < n; i++) {
+		cout << vec[i] << '\n';
 	}
 }
